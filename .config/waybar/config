@@ -1,0 +1,81 @@
+{
+  "layer": "top",
+  "position": "right",
+  "width": 20,
+  "spacing": 6,
+
+  "modules-left": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "battery",
+    "network",
+    "pulseaudio",
+    "pulseaudio#mic",
+    "tray"
+
+  ],
+
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+
+"clock": {
+  "format": "{:%a\n %d\n ---- \n %I\n %M}",
+  "tooltip": true,
+  "tooltip-format": "{:%A, %Y-%m-%d\n:%H:%M:%S}",
+  "on-click": "hyprctl dispatch exec \"[monitor focused] qs -c ~/.config/quickshell/calendarpopup ipc call calendar toggle\""
+
+},
+
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+  },
+
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪",
+    "format-linked": "",
+    "max-length": 1,
+    "tooltip": false
+  },
+
+  "pulseaudio": {
+    "format": "",
+    "format-muted": "",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "tooltip": true
+  },
+
+  "pulseaudio#mic": {
+    "source": "@DEFAULT_SOURCE@",
+    "format": "{format_source}",
+    "format-source": ":0",
+    "format-source-muted": ":x",
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "tooltip": true
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-connected": " {num_connections}",
+    "format-disabled": "",
+    "on-click": "rofi-bluetooth",
+    "tooltip": true
+  },
+
+  "battery": {
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged": "󰚥",
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip": true
+  },
+
+  "tray": { "spacing": 8 }
+}

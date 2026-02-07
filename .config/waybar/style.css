@@ -1,0 +1,202 @@
+/* ==========================================
+   Waybar — Retro “sysmon window” vibe (IRON + 3D)
+   NARROW + CRT scanlines + clock title strip
+   ========================================== */
+
+/* IRON palette */
+@define-color bg         #48494B;
+@define-color panel      #3F4042;
+@define-color line       #DADADA;
+@define-color line_dim   #9A9A9A;
+@define-color text       #F0F0F0;
+@define-color text_dim   #C7C7C7;
+@define-color accent     #58A6FF;
+@define-color danger     #FF5C7A;
+
+/* Bevel helpers */
+@define-color hi         #7A7B7E;
+@define-color lo         #2E2F31;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "MS Sans Serif", "Tahoma", "Verdana", sans-serif;
+  font-size: 10px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @bg;
+  color: @text;
+
+  border-top: 1px solid @hi;
+  border-left: 1px solid @hi;
+  border-right: 1px solid @lo;
+  border-bottom: 1px solid @lo;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.08),
+    inset -1px -1px 0 rgba(0,0,0,0.25);
+}
+
+/* Make everything tighter for narrow bar */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0px;
+}
+
+/* ---------- Shared framed panels (tight) ---------- */
+.modules-center,
+.modules-right {
+  background: @panel;
+  margin: 1px;          /* was 2px */
+  padding: 2px;         /* was 4px */
+
+  border-top: 1px solid @hi;
+  border-left: 1px solid @hi;
+  border-right: 1px solid @lo;
+  border-bottom: 1px solid @lo;
+
+  /* subtle depth */
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.05),
+    inset -1px -1px 0 rgba(0,0,0,0.25);
+}
+
+/* ---------- UPGRADE #1: CRT scanlines on panels ---------- */
+.modules-center,
+.modules-right,
+#clock {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0px,
+    rgba(0,0,0,0.10) 1px,
+    rgba(255,255,255,0.02) 2px,
+    rgba(255,255,255,0.02) 3px
+  );
+  background-size: auto;
+  background-repeat: repeat;
+}
+
+/* ---------- Clock tile (tight) ---------- */
+#clock {
+  background: @panel;
+  margin: 1px;
+  padding: 0;
+
+  border-top: 1px solid @hi;
+  border-left: 1px solid @hi;
+  border-right: 1px solid @lo;
+  border-bottom: 1px solid @lo;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.05),
+    inset -1px -1px 0 rgba(0,0,0,0.25);
+
+  min-height: 64px; /* a bit smaller */
+}
+
+/* ---------- UPGRADE #2: clock title strip accent ---------- */
+/* This draws a tiny “titlebar” band at the top */
+#clock label {
+  padding: 6px 4px; /* tighter */
+  color: @text;
+  background-image: linear-gradient(
+    to right,
+    rgba(88,166,255,0.55),
+    rgba(88,166,255,0.12)
+  );
+  border-bottom: 1px solid rgba(0,0,0,0.35);
+}
+
+/* ---------- Make modules inside panels FLAT ---------- */
+.modules-center #workspaces,
+.modules-right #network,
+.modules-right #pulseaudio,
+.modules-right #pulseaudio#mic,
+.modules-right #bluetooth,
+.modules-right #battery,
+.modules-right #tray {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* Workspaces: EXTRA compact for narrow bar */
+#workspaces button {
+  background: transparent;
+  color: @text_dim;
+
+  margin: 0;
+  padding: 1px 0px;
+
+  min-width: 14px;   /* was 18 */
+  min-height: 14px;  /* was 18 */
+
+  border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+  border: 1px solid @line_dim;
+  color: @text;
+}
+
+#workspaces button.active {
+  border: 1px solid @accent;
+  color: @text;
+}
+
+/* Bottom controls: compact rows */
+.modules-right #network,
+.modules-right #pulseaudio,
+.modules-right #pulseaudio#mic,
+.modules-right #bluetooth,
+.modules-right #battery,
+.modules-right #tray {
+  padding: 2px 1px;   /* tighter */
+  margin: 1px 0;      /* tighter */
+  border: 1px solid transparent;
+  color: @text_dim;
+}
+
+.modules-right #network:hover,
+.modules-right #pulseaudio:hover,
+.modules-right #pulseaudio#mic:hover,
+.modules-right #bluetooth:hover,
+.modules-right #battery:hover,
+.modules-right #tray:hover {
+  border: 1px solid @line_dim;
+  color: @text;
+}
+
+/* Tray */
+#tray > .passive {
+  -gtk-icon-effect: none;
+  opacity: 0.9;
+}
+
+/* States */
+#battery.warning { color: #FFD27A; }
+#battery.critical { color: @danger; }
+#network.disconnected,
+#pulseaudio.muted { color: @text_dim; }
+
+/* Tooltips */
+tooltip {
+  background: @panel;
+  color: @text;
+
+  border-top: 1px solid @hi;
+  border-left: 1px solid @hi;
+  border-right: 1px solid @lo;
+  border-bottom: 1px solid @lo;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.05),
+    inset -1px -1px 0 rgba(0,0,0,0.25);
+}
+tooltip label { padding: 6px; }
+
