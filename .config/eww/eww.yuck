@@ -1,0 +1,37 @@
+;; -------------------------
+;; Simple slide-down calendar
+;; -------------------------
+
+(defvar cal_open false)
+
+;; keep date updated
+(defpoll cal_year  :interval "60m" `date +%Y`)
+(defpoll cal_month :interval "60m" `date +%-m`)
+(defpoll cal_day   :interval "60m" `date +%-d`)
+(defpoll cal_title :interval "30s" `date '+%A • %b %d'`)
+
+(defwidget calendar_popup []
+  (box :class "cal-wrap"
+    (revealer :transition "slidedown" :duration "180ms" :reveal cal_open
+      (box :class "cal-panel" :orientation "vertical" :spacing 8
+        (label :class "cal-title" :text cal_title)
+
+        (calendar :class "cal"
+          :day cal_day
+          :month cal_month
+          :year cal_year
+          :show-details false
+          :show-heading true
+          :show-day-names true
+          :show-week-numbers false)))))
+
+
+(defwindow calendar
+  :monitor 0
+  :stacking "fg"
+  :exclusive false
+  :focusable true
+  ;; top center, full-width so it feels like it comes “from the bar”
+  :geometry (geometry :x "0%" :y "0px" :width "100%" :height "280px" :anchor "top center")
+  (calendar_popup))
+

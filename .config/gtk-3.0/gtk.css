@@ -1,0 +1,17 @@
+@import 'colors.css';
+/* Ristretto transparency */
+window.ristretto window,
+window.ristretto box,
+window.ristretto stack,
+window.ristretto overlay {
+    background-color: rgba(20, 20, 20, 0.75);
+}
+
+window.ristretto scrolledwindow {
+    background-color: transparent;
+}
+
+window.ristretto image {
+    background-color: transparent;
+}
+

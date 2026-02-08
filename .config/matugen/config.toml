@@ -1,0 +1,36 @@
+[config.wallpaper]
+
+set = true
+# ...
+command = "swww"
+
+arguments = ["img", "--transition-type", "center"]
+
+[templates.hyprland]
+input_path = "/home/god/.config/matugen/templates/hyprland-colors.conf"
+output_path = "/home/god/.config/hypr/colors.conf"
+
+[templates.kitty]
+input_path = "/home/god/.config/matugen/templates/kitty-colors.conf"
+output_path = "/home/god/.config/kitty/colors.conf"
+post_hook = 'kill -SIGUSR1 $(pgrep kitty)'
+
+[templates.rofi]
+input_path = "/home/god/.config/matugen/templates/rofi-colors.rasi"
+output_path = "/home/god/.config/rofi/colors/colors.rasi"
+
+[templates.starship]
+input_path = "/home/god/.config/matugen/templates/starship-colors.toml"
+output_path = "/home/god/.config/starship.toml"
+
+[templates.sway]
+input_path = "/home/god/.config/matugen/templates/sway-colors.conf"
+output_path = "/home/god/.config/sway/colors.conf"
+
+[templates.ncspot]
+input_path ="/home/god/.config/matugen/templates/ncspot-colors.toml"
+output_path = "/home/god/.config/ncspot/config.toml"
+
+[templates.eww]
+input_path = '/home/god/.config/matugen/templates/eww-colors.scss'
+output_path = '/home/god/.config/eww/colors.scss'

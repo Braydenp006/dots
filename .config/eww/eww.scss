@@ -1,0 +1,53 @@
+/* Match your Waybar “IRON + 3D” theme */
+$bg:        #48494B;   /* iron */
+$panel:     #3F4042;   /* darker panel */
+$line:      #DADADA;   /* bright outline */
+$line_dim:  #9A9A9A;   /* dim outline */
+$text:      #F0F0F0;
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  color: $text;
+}
+
+.cal-wrap {
+  padding: 8px 10px;
+}
+
+.cal-panel {
+  border-radius: 0px;              /* NO rounding */
+  background: $panel;
+  border: 1px solid $line;
+
+  /* subtle “3D bevel” like your bar */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -1px 0 rgba(0,0,0,0.35),
+    0 2px 0 rgba(0,0,0,0.35);
+
+  padding: 10px 12px;
+}
+
+.cal-title {
+  font-size: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(218,218,218,0.35);
+}
+
+/* GTK calendar styling */
+calendar {
+  background: transparent;
+  border-radius: 0px;
+  padding: 6px 2px;
+}
+
+calendar:selected {
+  background: rgba(218,218,218,0.22);
+  color: $text;
+}
+
+calendar.header {
+  color: $text;
+}
+
